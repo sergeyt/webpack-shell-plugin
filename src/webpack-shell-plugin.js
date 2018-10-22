@@ -13,7 +13,7 @@ const defaultOptions = {
 
 export default class WebpackShellPlugin {
   constructor(options) {
-    this.options = this.validateInput(this.mergeOptions(options, defaultOptions));
+    this.options = this.validateInput(Object.assign({}, defaultOptions, options));
   }
 
   puts(error) {
@@ -57,10 +57,6 @@ export default class WebpackShellPlugin {
       options.onBuildExit = options.onBuildExit.split('&&');
     }
     return options;
-  }
-
-  mergeOptions(options, defaults) {
-    return Object.assign({}, defaults, options);
   }
 
   apply(compiler) {
